@@ -14,12 +14,15 @@ Promise.all(proms)
     const dataset1 = data[0];
     const dataset2 = data[1];
     const counties = dataset2.objects.counties.geometries;
-    console.log(dataset1);
+  
     console.log(dataset2);  
     console.log(counties);
      
     const w = 1200
-    const h = 750;
+    const h = 400;
+  
+    dataset1.map((d, i) => d.polygon = counties[i].arcs);
+    console.log(dataset1);
   
     const projection = d3.geoAlbersUsa()
         .translate([w/2, h/2])
