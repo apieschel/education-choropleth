@@ -14,9 +14,9 @@ Promise.all(proms)
     const dataset1 = data[0];
     const dataset2 = data[1];
     const counties = dataset2.objects.counties.geometries;
-  
-    console.log(dataset2);  
-    console.log(counties);
+    const nation = dataset2.objects.nation.geometries[0].arcs[0][0];
+   
+    console.log(nation);
      
     const w = 1200
     const h = 400;
@@ -57,7 +57,9 @@ Promise.all(proms)
           .attr("class", "county")
           .attr("data-fips", d => d.fips)
           .attr("data-education", d => d.bachelorsOrHigher)
-          //.attr("d", d => d.polygon)
+          .attr("d", "M 10 25 L 10 75 L 60 75 L 10 25")
+          .style("stroke", "#fff")
+          .style("stroke-width", "1")
   
     const legend = svg.append("g")
                     .attr("id", "legend");
