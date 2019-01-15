@@ -15,8 +15,21 @@ Promise.all(proms)
     const dataset2 = data[1];
     const counties = dataset2.objects.counties.geometries;
     const nation = dataset2.objects.nation.geometries[0].arcs[0][0];
+    let nationPath = "";
    
+    console.log(dataset2);
     console.log(nation);
+    
+    for(let i = 0; i < nation.length; i++) {
+      if(i === 0) {
+        nationPath = "M " + nation[i];
+      } else {
+        nationPath = nationPath + " L " + nation[i];
+      }
+    }
+    
+    console.log(nationPath);
+    
      
     const w = 1200
     const h = 400;
@@ -49,8 +62,13 @@ Promise.all(proms)
       .append("h2")
       .attr("id", "description")
       .text("Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)");
-  
-    svg.selectAll("path")
+    
+    svg.append("path")
+          .attr("path", nationPath)
+          .style("stroke", "#fff")
+          .style("stroke-width", "1")
+    
+    /*svg.selectAll("path")
           .data(dataset1)
           .enter()
           .append("path")
@@ -60,7 +78,7 @@ Promise.all(proms)
           .attr("d", "M 10 25 L 10 75 L 60 75 L 10 25")
           .style("stroke", "#fff")
           .style("stroke-width", "1")
-  
+    */
     const legend = svg.append("g")
                     .attr("id", "legend");
       
