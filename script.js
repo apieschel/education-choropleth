@@ -53,7 +53,58 @@ Promise.all(proms)
           .append("path")
           .attr("class", "county")
           .attr("data-fips", d => d.fips)
-          .attr("data-education", 0)
+          .attr("data-education", d => d.bachelorsOrHigher)
           //.attr("d", path)
+  
+    const legend = svg.append("g")
+                    .attr("id", "legend");
+      
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("y", h - 11)
+      .attr("width", 10)
+      .attr("height", 10)
+      .attr("fill", "blue")
+      
+    legend.append("text")
+      .text("less than -0.1 variance")
+      .attr("x", 20)
+      .attr("y", (h))
+    
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("y", (h - 26))
+      .attr("width", 10)
+      .attr("height", 10)
+      .attr("fill", "skyblue")
+      
+    legend.append("text")
+      .text("between 0 and -0.1 variance")
+      .attr("x", 20)
+      .attr("y", (h - 15))
+    
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("y", (h - 41))
+      .attr("width", 10)
+      .attr("height", 10)
+      .attr("fill", "yellow")
+      
+    legend.append("text")
+      .text("between 0 and 0.1 variance")
+      .attr("x", 20)
+      .attr("y", (h - 30))
+    
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("y", (h - 56))
+      .attr("width", 10)
+      .attr("height", 10)
+      .attr("fill", "red")
+      
+    legend.append("text")
+      .text("greater than 0.1 variance")
+      .attr("x", 20)
+      .attr("y", (h - 45))
 
   });
