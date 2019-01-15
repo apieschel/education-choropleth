@@ -13,8 +13,10 @@ Promise.all(proms)
   .then((d) => {
     const dataset1 = data[0];
     const dataset2 = data[1];
+    const counties = dataset2.objects.counties.geometries;
     console.log(dataset1);
     console.log(dataset2);  
+    console.log(counties);
      
     const w = 1200
     const h = 750;
@@ -22,10 +24,12 @@ Promise.all(proms)
     const projection = d3.geoAlbersUsa()
         .translate([w/2, h/2])
         .scale([500]);
-
+    console.log(projection);
+  
     //Define default path generator
     const path = d3.geoPath()
       .projection(projection);
+    console.log(path);
   
     const svg = d3.select(".container")
         .append("svg")
@@ -44,9 +48,12 @@ Promise.all(proms)
       .text("Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)");
   
     svg.selectAll("path")
-          .data(json.features)
+          .data(dataset1)
           .enter()
           .append("path")
-          .attr("d", path)
+          .attr("class", "county")
+          .attr("data-fips", d => d.fips)
+          .attr("data-education", 0)
+          //.attr("d", path)
 
   });
