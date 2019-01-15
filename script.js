@@ -57,7 +57,7 @@ Promise.all(proms)
           .attr("class", "county")
           .attr("data-fips", d => d.fips)
           .attr("data-education", d => d.bachelorsOrHigher)
-          //.attr("d", path)
+          //.attr("d", d => d.polygon)
   
     const legend = svg.append("g")
                     .attr("id", "legend");
