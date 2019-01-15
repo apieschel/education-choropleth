@@ -77,22 +77,31 @@ Promise.all(proms)
       .attr("data-fips", (d,i) => dataset1[i].fips)
       .attr("data-education", (d,i) => dataset1[i].bachelorsOrHigher)
       .attr("d", path)
-      .attr("fill", d)
+      .attr("fill", (d,i) => {
+        if(dataset1[i].bachelorsOrHigher < 10) {
+          return "blue"
+        } else if(dataset1[i].bachelorsOrHigher > 10 && dataset1[i].bachelorsOrHigher < 20) {
+          return "skyblue"
+        } else if(dataset1[i].bachelorsOrHigher > 20 && dataset1[i].bachelorsOrHigher < 30) {
+          return "yellow"
+        } else {
+          return "red"
+        }
+      })
       .on("mouseover", function(d,i) {
           tooltip
             .transition()
             .duration(100)
             .style("opacity", 0.85);
           tooltip
-            .html("<p>" + dataset1[i].bachelorsOrHigher + "</p>")
+            .html("<p><strong>College Degree or Higher: </strong>" + dataset1[i].bachelorsOrHigher + "%</p>")
             .style("left", d3.event.pageX + 15 + "px")
             .style("top", d3.event.pageY + 15 + "px");
-          tooltip.attr("data-year", d.year);
+          tooltip.attr("data-education", dataset1[i].bachelorsOrHigher);
         })
         .on("mouseout", function(d) {
           tooltip
             .transition()
-            .duration(100)
             .style("opacity", 0);
         });
     
@@ -101,50 +110,50 @@ Promise.all(proms)
       
     legend.append("rect")
       .attr("x", 0)
-      .attr("y", h - 11)
+      .attr("y", h - 16)
       .attr("width", 10)
       .attr("height", 10)
       .attr("fill", "blue")
       
     legend.append("text")
-      .text("less than -0.1 variance")
+      .text("college degree or higher less than 10 percent")
       .attr("x", 20)
-      .attr("y", (h))
+      .attr("y", (h - 5))
     
     legend.append("rect")
       .attr("x", 0)
-      .attr("y", (h - 26))
+      .attr("y", (h - 31))
       .attr("width", 10)
       .attr("height", 10)
       .attr("fill", "skyblue")
       
     legend.append("text")
-      .text("between 0 and -0.1 variance")
+      .text("college degree or higher between 10 and 20 percent")
       .attr("x", 20)
-      .attr("y", (h - 15))
+      .attr("y", (h - 20))
     
     legend.append("rect")
       .attr("x", 0)
-      .attr("y", (h - 41))
+      .attr("y", (h - 46))
       .attr("width", 10)
       .attr("height", 10)
       .attr("fill", "yellow")
       
     legend.append("text")
-      .text("between 0 and 0.1 variance")
+      .text("college degree or higher between 20 and 30 percent")
       .attr("x", 20)
-      .attr("y", (h - 30))
+      .attr("y", (h - 35))
     
     legend.append("rect")
       .attr("x", 0)
-      .attr("y", (h - 56))
+      .attr("y", (h - 61))
       .attr("width", 10)
       .attr("height", 10)
       .attr("fill", "red")
       
     legend.append("text")
-      .text("greater than 0.1 variance")
+      .text("college degree or higher greater than 30 percent")
       .attr("x", 20)
-      .attr("y", (h - 45))
+      .attr("y", (h - 50))
 
   });
