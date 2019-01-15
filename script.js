@@ -15,6 +15,23 @@ Promise.all(proms)
     const dataset2 = data[1];
     console.log(dataset1);
     console.log(dataset2);  
+     
+    const w = 1200
+    const h = 750;
+  
+    const projection = d3.geoAlbersUsa()
+        .translate([w/2, h/2])
+        .scale([500]);
+
+    //Define default path generator
+    const path = d3.geoPath()
+      .projection(projection);
+  
+    const svg = d3.select(".container")
+        .append("svg")
+        .attr("id", "chart")
+        .attr("width", w)
+        .attr("height", h)
 
     d3.select(".heading")
       .append("h1")
@@ -25,5 +42,11 @@ Promise.all(proms)
       .append("h2")
       .attr("id", "description")
       .text("Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)");
+  
+    svg.selectAll("path")
+          .data(json.features)
+          .enter()
+          .append("path")
+          .attr("d", path)
 
   });
