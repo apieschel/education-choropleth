@@ -18,7 +18,7 @@ Promise.all(proms)
     let nationPath = "";
    
     console.log(dataset2);
-    console.log(nation);
+    //console.log(nation);
     
     for(let i = 0; i < nation.length; i++) {
       if(i === 0) {
@@ -28,7 +28,7 @@ Promise.all(proms)
       }
     }
     
-    console.log(nationPath);
+    //console.log(nationPath);
     
      
     const w = 1200
@@ -43,8 +43,8 @@ Promise.all(proms)
     console.log(projection);
   
     //Define default path generator
-    const path = d3.geoPath()
-      .projection(projection);
+    const path = d3.geoPath();
+  
     console.log(path);
   
     const svg = d3.select(".container")
@@ -63,13 +63,13 @@ Promise.all(proms)
       .attr("id", "description")
       .text("Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)");
     
-    svg.append("path")
+    /*svg.append("path")
           .attr("path", nationPath)
           .style("stroke", "#fff")
-          .style("stroke-width", "1")
+          .style("stroke-width", "1")*/
     
-    /*svg.selectAll("path")
-          .data(dataset1)
+    svg.selectAll("path")
+          .data(topojson.feature(us, us.objects.counties).features)
           .enter()
           .append("path")
           .attr("class", "county")
@@ -78,7 +78,7 @@ Promise.all(proms)
           .attr("d", "M 10 25 L 10 75 L 60 75 L 10 25")
           .style("stroke", "#fff")
           .style("stroke-width", "1")
-    */
+    
     const legend = svg.append("g")
                     .attr("id", "legend");
       
