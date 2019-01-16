@@ -45,6 +45,7 @@ Promise.all(proms)
       .attr("id", "description")
       .text("Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)");
     
+  console.log(topojson.feature(dataset2, dataset2.objects.counties).features);
     svg.selectAll("path")
       .data(topojson.feature(dataset2, dataset2.objects.counties).features)
       .enter()
