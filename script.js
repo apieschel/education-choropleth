@@ -13,6 +13,9 @@ Promise.all(proms)
   .then((d) => {
     const dataset1 = data[0];
     const dataset2 = data[1];
+    
+    console.log(dataset1);
+    console.log(dataset2);
 
     const w = 1200
     const h = 700;
@@ -49,6 +52,8 @@ Promise.all(proms)
       .attr("class", "county")
       .attr("data-fips", (d,i) => dataset1[i].fips)
       .attr("data-education", (d,i) => dataset1[i].bachelorsOrHigher)
+      .attr("data-county", ((d,i) => dataset1[i].area_name))
+      .attr("data-state", ((d,i) => dataset1[i].state))
       .attr("d", path)
       .attr("fill", (d,i) => {
         if(dataset1[i].bachelorsOrHigher < 10) {
@@ -67,7 +72,7 @@ Promise.all(proms)
             .duration(100)
             .style("opacity", 0.85);
           tooltip
-            .html("<p><strong>College Degree or Higher: </strong>" + dataset1[i].bachelorsOrHigher + "%</p>")
+            .html("<p>" + dataset1[i].area_name + ", " + dataset1[i].state +  " " + dataset1[i].bachelorsOrHigher + "%</p>")
             .style("left", d3.event.pageX + 15 + "px")
             .style("top", d3.event.pageY + 15 + "px");
           tooltip.attr("data-education", dataset1[i].bachelorsOrHigher);
@@ -79,9 +84,11 @@ Promise.all(proms)
         });
     
         svg.append("path")
-            .datum(topojson.mesh(dataset2, us.objects.states, function(a, b) { return a !== b; }))
+            .datum(topojson.mesh(dataset2, dataset2.objects.states, function(a, b) { return a !== b; }))
             .attr("class", "states")
-            .attr("d", path);
+            .attr("d", path)
+            .attr("fill", "none")
+            .attr("stroke", "#fff");
   
     const legend = svg.append("g")
                     .attr("id", "legend");
