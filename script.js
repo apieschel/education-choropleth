@@ -65,15 +65,22 @@ Promise.all(proms)
         console.log('could find data for: ', d.id);
         return 0
        })
-      .attr("data-county", ((d,i) => dataset1[i].area_name))
-      .attr("data-state", ((d,i) => dataset1[i].state))
       .attr("d", path)
       .attr("fill", (d,i) => {
-        if(dataset1[i].bachelorsOrHigher < 10) {
+        let education;
+        let result = dataset1.filter(function( obj ) {
+          return obj.fips == d.id;
+        });
+        if(result[0]){
+          education = result[0].bachelorsOrHigher;
+        } else {
+          education = 0;
+        }
+        if(education < 10) {
           return "blue"
-        } else if(dataset1[i].bachelorsOrHigher > 10 && dataset1[i].bachelorsOrHigher < 20) {
+        } else if(education > 10 && education < 20) {
           return "skyblue"
-        } else if(dataset1[i].bachelorsOrHigher > 20 && dataset1[i].bachelorsOrHigher < 30) {
+        } else if(education > 20 && education < 30) {
           return "yellow"
         } else {
           return "red"
@@ -81,11 +88,15 @@ Promise.all(proms)
       })
       .on("mouseover", function(d,i) {
           let education;
+          let name; 
+          let state;
           let result = dataset1.filter(function( obj ) {
             return obj.fips == d.id;
           });
           if(result[0]){
             education = result[0].bachelorsOrHigher;
+            name = result[0].area_name;
+            state = result[0].state;
           } else {
             education = 0;
           }
@@ -94,7 +105,7 @@ Promise.all(proms)
             .duration(100)
             .style("opacity", 0.85);
           tooltip
-            .html("<p>" + dataset1[i].area_name + ", " + dataset1[i].state +  " " + dataset1[i].bachelorsOrHigher + "%</p>")
+            .html("<p>" + name + ", " + state +  " " + education + "%</p>")
             .style("left", d3.event.pageX + 15 + "px")
             .style("top", d3.event.pageY + 15 + "px");
           tooltip.attr("data-education", education);
