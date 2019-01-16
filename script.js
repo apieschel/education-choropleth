@@ -46,13 +46,25 @@ Promise.all(proms)
       .text("Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)");
     
   console.log(topojson.feature(dataset2, dataset2.objects.counties).features);
-    svg.selectAll("path")
+    svg.append("g")
+      .attr("class", "counties")
+      .selectAll("path")
       .data(topojson.feature(dataset2, dataset2.objects.counties).features)
       .enter()
       .append("path")
       .attr("class", "county")
-      .attr("data-fips", (d,i) => dataset1[i].fips)
-      .attr("data-education", (d,i) => dataset1[i].bachelorsOrHigher)
+      .attr("data-fips", (d) => d.id)
+      .attr("data-education", function(d) {
+        var result = dataset1.filter(function( obj ) {
+          return obj.fips == d.id;
+        });
+        if(result[0]){
+          return result[0].bachelorsOrHigher
+        }
+        //could not find a matching fips id in the data
+        console.log('could find data for: ', d.id);
+        return 0
+       })
       .attr("data-county", ((d,i) => dataset1[i].area_name))
       .attr("data-state", ((d,i) => dataset1[i].state))
       .attr("d", path)
@@ -68,6 +80,15 @@ Promise.all(proms)
         }
       })
       .on("mouseover", function(d,i) {
+          let education;
+          let result = dataset1.filter(function( obj ) {
+            return obj.fips == d.id;
+          });
+          if(result[0]){
+            education = result[0].bachelorsOrHigher;
+          } else {
+            education = 0;
+          }
           tooltip
             .transition()
             .duration(100)
@@ -76,7 +97,7 @@ Promise.all(proms)
             .html("<p>" + dataset1[i].area_name + ", " + dataset1[i].state +  " " + dataset1[i].bachelorsOrHigher + "%</p>")
             .style("left", d3.event.pageX + 15 + "px")
             .style("top", d3.event.pageY + 15 + "px");
-          tooltip.attr("data-education", dataset1[i].bachelorsOrHigher);
+          tooltip.attr("data-education", education);
         })
         .on("mouseout", function(d) {
           tooltip
