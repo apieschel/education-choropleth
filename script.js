@@ -13,38 +13,11 @@ Promise.all(proms)
   .then((d) => {
     const dataset1 = data[0];
     const dataset2 = data[1];
-    const counties = dataset2.objects.counties.geometries;
-    const nation = dataset2.objects.nation.geometries[0].arcs[0][0];
-    let nationPath = "";
-   
-    console.log(dataset2);
-    console.log(counties);
-    
-    for(let i = 0; i < nation.length; i++) {
-      if(i === 0) {
-        nationPath = "M " + nation[i];
-      } else {
-        nationPath = nationPath + " L " + nation[i];
-      }
-    }
-    
-    //console.log(nationPath);
-     
+
     const w = 1200
     const h = 700;
   
-    dataset1.map((d, i) => d.polygon = counties[i].arcs);
-    console.log(dataset1);
-  
-    const projection = d3.geoAlbersUsa()
-        .translate([w/2, h/2])
-        .scale([500]);
-    console.log(projection);
-  
-    //Define default path generator
     const path = d3.geoPath();
-  
-    console.log(path);
   
     const svg = d3.select(".container")
       .append("svg")
@@ -105,6 +78,11 @@ Promise.all(proms)
             .style("opacity", 0);
         });
     
+        svg.append("path")
+            .datum(topojson.mesh(dataset2, us.objects.states, function(a, b) { return a !== b; }))
+            .attr("class", "states")
+            .attr("d", path);
+  
     const legend = svg.append("g")
                     .attr("id", "legend");
       
