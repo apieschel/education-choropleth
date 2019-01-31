@@ -17,8 +17,8 @@ Promise.all(proms)
     console.log(dataset1);
     console.log(dataset2);
 
-    const w = 1200
-    const h = 700;
+    const w = 1000
+    const h = 670;
   
     const path = d3.geoPath();
   
@@ -134,7 +134,7 @@ Promise.all(proms)
       .attr("fill", "blue")
       
     legend.append("text")
-      .text("Less than 10 percent of the county's population has college degree or higher.")
+      .text("Less than 10 percent of the county's population (age 25 and up) has college degree or higher.")
       .attr("x", 20)
       .attr("y", (h - 5))
     
@@ -146,7 +146,7 @@ Promise.all(proms)
       .attr("fill", "skyblue")
       
     legend.append("text")
-      .text("Between 10 and 20 percent of the county's population has college degree or higher.")
+      .text("Between 10 and 20 percent of the county's population (age 25 and up) has college degree or higher.")
       .attr("x", 20)
       .attr("y", (h - 20))
     
@@ -158,7 +158,7 @@ Promise.all(proms)
       .attr("fill", "yellow")
       
     legend.append("text")
-      .text("Between 20 and 30 percent of the county's population has college degree or higher.")
+      .text("Between 20 and 30 percent of the county's population (age 25 and up) has college degree or higher.")
       .attr("x", 20)
       .attr("y", (h - 35))
     
@@ -170,7 +170,7 @@ Promise.all(proms)
       .attr("fill", "red")
       
     legend.append("text")
-      .text("Greater than 30 percent of the county's population has college degree or higher.")
+      .text("Greater than 30 percent of the county's population (age 25 and up) has college degree or higher.")
       .attr("x", 20)
       .attr("y", (h - 50))
   });
