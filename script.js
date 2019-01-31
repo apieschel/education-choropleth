@@ -38,7 +38,7 @@ Promise.all(proms)
     d3.select(".heading")
       .append("h1")
       .attr("id", "title")
-      .text("United States Educational Attainment");
+      .text("Higher Education in the United States");
 
     d3.select(".heading")
       .append("h2")
@@ -134,7 +134,7 @@ Promise.all(proms)
       .attr("fill", "blue")
       
     legend.append("text")
-      .text("college degree or higher less than 10 percent")
+      .text("Less than 10 percent of the county's population has college degree or higher.")
       .attr("x", 20)
       .attr("y", (h - 5))
     
@@ -146,7 +146,7 @@ Promise.all(proms)
       .attr("fill", "skyblue")
       
     legend.append("text")
-      .text("college degree or higher between 10 and 20 percent")
+      .text("Between 10 and 20 percent of the county's population has college degree or higher.")
       .attr("x", 20)
       .attr("y", (h - 20))
     
@@ -158,7 +158,7 @@ Promise.all(proms)
       .attr("fill", "yellow")
       
     legend.append("text")
-      .text("college degree or higher between 20 and 30 percent")
+      .text("Between 20 and 30 percent of the county's population has college degree or higher.")
       .attr("x", 20)
       .attr("y", (h - 35))
     
@@ -170,8 +170,7 @@ Promise.all(proms)
       .attr("fill", "red")
       
     legend.append("text")
-      .text("college degree or higher greater than 30 percent")
+      .text("Greater than 30 percent of the county's population has college degree or higher.")
       .attr("x", 20)
       .attr("y", (h - 50))
-
   });
