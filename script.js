@@ -77,13 +77,13 @@ Promise.all(proms)
           education = 0;
         }
         if(education < 10) {
-          return "blue"
+          return "silver";
         } else if(education > 10 && education < 20) {
-          return "skyblue"
+          return "#0099F3";
         } else if(education > 20 && education < 30) {
-          return "yellow"
+          return "#C589C5";
         } else {
-          return "red"
+          return "#0046BC";
         }
       })
       .on("mouseover", function(d,i) {
@@ -131,7 +131,7 @@ Promise.all(proms)
       .attr("y", h - 16)
       .attr("width", 10)
       .attr("height", 10)
-      .attr("fill", "blue")
+      .attr("fill", "silver")
       
     legend.append("text")
       .text("Less than 10 percent of the county's population (age 25 and up) has college degree or higher.")
@@ -143,7 +143,7 @@ Promise.all(proms)
       .attr("y", (h - 31))
       .attr("width", 10)
       .attr("height", 10)
-      .attr("fill", "skyblue")
+      .attr("fill", "#0099F3")
       
     legend.append("text")
       .text("Between 10 and 20 percent of the county's population (age 25 and up) has college degree or higher.")
@@ -155,7 +155,7 @@ Promise.all(proms)
       .attr("y", (h - 46))
       .attr("width", 10)
       .attr("height", 10)
-      .attr("fill", "yellow")
+      .attr("fill", "#C589C5")
       
     legend.append("text")
       .text("Between 20 and 30 percent of the county's population (age 25 and up) has college degree or higher.")
@@ -167,7 +167,7 @@ Promise.all(proms)
       .attr("y", (h - 61))
       .attr("width", 10)
       .attr("height", 10)
-      .attr("fill", "red")
+      .attr("fill", "#0046BC")
       
     legend.append("text")
       .text("Greater than 30 percent of the county's population (age 25 and up) has college degree or higher.")

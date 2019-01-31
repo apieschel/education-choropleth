@@ -13,17 +13,18 @@ h1, h2 {
 }
 
 .county:hover {
-  fill: green;
+  fill: black;
 }
 
 .tooltip {
+    border: 1px solid #0046BC;
     position: absolute;			
     width: 200px;					
     height: auto;					
     padding: 5px 10px;				
     font: 14px sans-serif;		
-    background: lavender;	
-    border: 0px;		
+    font-weight: bold; 
+    background: silver;	
     pointer-events: none;
 }
 
