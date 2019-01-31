@@ -1,7 +1,9 @@
 /* globals d3, topojson */
 
+// Source: 
 // Stack Overflow: How to use multiple XMLHttpRequest?
 // Answer: https://stackoverflow.com/a/46505251
+
 const index = ["https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json", 
              "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json"]
 const proms = index.map(d => fetch(d));
@@ -13,9 +15,6 @@ Promise.all(proms)
   .then((d) => {
     const dataset1 = data[0];
     const dataset2 = data[1];
-    
-    console.log(dataset1);
-    console.log(dataset2);
 
     const w = 1000
     const h = 670;
@@ -45,7 +44,6 @@ Promise.all(proms)
       .attr("id", "description")
       .text("Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)");
     
-  console.log(topojson.feature(dataset2, dataset2.objects.counties).features);
     svg.append("g")
       .attr("class", "counties")
       .selectAll("path")

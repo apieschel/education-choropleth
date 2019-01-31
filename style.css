@@ -17,15 +17,15 @@ h1, h2 {
 }
 
 .tooltip {
-    border: 1px solid #0046BC;
-    position: absolute;			
-    width: 250px;					
-    height: auto;					
-    padding: 5px 10px;				
-    font: 14px sans-serif;		
-    font-weight: bold; 
-    background: silver;	
-    pointer-events: none;
+  background: silver;	
+  border: 1px solid #0046BC;
+  font: 14px sans-serif;		
+  font-weight: bold;
+  height: auto;				
+  position: absolute;	
+  padding: 5px 10px;	
+  pointer-events: none;
+  width: 250px;				
 }
 
 text {
